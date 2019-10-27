@@ -19,8 +19,10 @@ type SoapRequest struct {
 type Message struct {
 	AddMessage struct {
 		DataMessage struct {
-			Data createLinkMessage `xml:"Data"`
-			Type string            `xml:"Type"`
+			Data struct {
+				Message createLinkMessage `xml:"Message"`
+			} `xml:"Data"`
+			Type string `xml:"Type"`
 		} `xml:"dataMessage"`
 	}
 }
