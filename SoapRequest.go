@@ -138,7 +138,7 @@ func (p *SoapRequest) CreateNewLink(link Link) (err error, r *SoapRequest) {
 		}
 		mess := fmt.Sprint(" <![CDATA[", string(byteAr), "]]>")
 	*/
-	p.Body.Message.AddMessage.DataMessage.Data = *mes
+	p.Body.Message.AddMessage.DataMessage.Data.Message = *mes
 	p.Body.Message.AddMessage.DataMessage.Type = "49"
 	r = p
 	return
