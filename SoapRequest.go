@@ -19,9 +19,8 @@ type SoapRequest struct {
 type Message struct {
 	AddMessage struct {
 		DataMessage struct {
-			XMLName xml.Name          `xml:"Data"`
-			Text    createLinkMessage `xml:",cdata"`
-			Type    string            `xml:"Type"`
+			Data createLinkMessage `xml:"Data"`
+			Type string            `xml:"Type"`
 		} `xml:"dataMessage"`
 	}
 }
@@ -137,7 +136,7 @@ func (p *SoapRequest) CreateNewLink(link Link) (err error, r *SoapRequest) {
 		}
 		mess := fmt.Sprint(" <![CDATA[", string(byteAr), "]]>")
 	*/
-	p.Body.Message.AddMessage.DataMessage.Text = *mes
+	p.Body.Message.AddMessage.DataMessage.Data = *mes
 	p.Body.Message.AddMessage.DataMessage.Type = "49"
 	r = p
 	return
@@ -198,7 +197,7 @@ type updateLinkMessage struct {
 Sends the SoapRequest and printed out the response
 */
 func (p *SoapRequest) Send(url, soapAction string) (err error, response string) {
-	soapbyte, err := xml.MarshalIndent(p, "", "  ")
+	soapbyte, err := xml.Marshal(p)
 	if err != nil {
 		return
 	}
