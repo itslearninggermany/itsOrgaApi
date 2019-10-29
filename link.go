@@ -157,3 +157,4 @@ func (p *Link) StoreInDataBase(db *gorm.DB) *Link {
 
 	return p
 }
+
