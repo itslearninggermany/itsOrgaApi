@@ -22,9 +22,9 @@ type SoapRequest struct {
 
 
 
-/*
-NewSoapRequest creates a new SoapRequest
-*/
+//
+//NewSoapRequest creates a new SoapRequest
+//
 func NewSoapRequest() *SoapRequest {
 	out := new(SoapRequest)
 	return out
