@@ -22,9 +22,9 @@ type SoapRequest struct {
 
 
 
-//
-//NewSoapRequest creates a new SoapRequest
-//
+/*
+NewSoapRequest creates a new SoapRequest
+*/
 func NewSoapRequest() *SoapRequest {
 	out := new(SoapRequest)
 	return out
@@ -60,49 +60,49 @@ func (p *SoapRequest) CreateNewLink(link Link) (err error, r *SoapRequest) {
 	mes.CreateExtensionInstance.Title = link.Title
 	mes.CreateExtensionInstance.Metadata.Description = link.Description
 	mes.CreateExtensionInstance.Metadata.Language = link.Language
-	if link.Format.Video {
+	if link.FormatVideo {
 		mes.CreateExtensionInstance.Metadata.Format = "Video"
-	} else if link.Format.Interactive {
+	} else if link.FormatInteractive {
 		mes.CreateExtensionInstance.Metadata.Format = "Interactive"
-	} else if link.Format.Image {
+	} else if link.FormatImage {
 		mes.CreateExtensionInstance.Metadata.Format = "Image"
-	} else if link.Format.Audio {
+	} else if link.FormatAudio {
 		mes.CreateExtensionInstance.Metadata.Format = "Audio"
-	} else if link.Format.Any {
+	} else if link.FormatAny {
 		mes.CreateExtensionInstance.Metadata.Format = "Any"
-	} else if link.Format.Text {
+	} else if link.FormatText {
 		mes.CreateExtensionInstance.Metadata.Format = "Text"
 	} else {
 		mes.CreateExtensionInstance.Metadata.Format = "Any"
 	}
-	mes.CreateExtensionInstance.Metadata.Keywords.Keyword = link.Keywords
+	mes.CreateExtensionInstance.Metadata.Keywords.Keyword = strings.Split(link.Keywords, ",")
 	role := ""
-	if link.IntendedEndUserRole.Mentor {
+	if link.IntendedEndUserRoleMentor {
 		role = role + " Mentor"
 	}
-	if link.IntendedEndUserRole.Learner {
+	if link.IntendedEndUserRoleLearner {
 		role = role + " Learner"
 	}
-	if link.IntendedEndUserRole.Instructor {
+	if link.IntendedEndUserRoleInstructor {
 		role = role + " Instructor"
 	}
 	mes.CreateExtensionInstance.Metadata.IntendedEndUserRole = role
 	mes.CreateExtensionInstance.Metadata.Grade = link.Grade
 	mes.CreateExtensionInstance.Metadata.ThumbnailUrl = link.ThumbnailUrl
 	edu := ""
-	if link.EducationalIntent.ProfessionalDevelopment {
+	if link.EducationalIntentProfessionalDevelopment {
 		edu = edu + " ProfessionalDevelopment"
 	}
-	if link.EducationalIntent.Practice {
+	if link.EducationalIntentPractice {
 		edu = edu + " Practice"
 	}
-	if link.EducationalIntent.Instructional {
+	if link.EducationalIntentInstructional {
 		edu = edu + " Instructional"
 	}
-	if link.EducationalIntent.Assessment {
+	if link.EducationalIntentAssessment {
 		edu = edu + " Assessment"
 	}
-	if link.EducationalIntent.Activity {
+	if link.EducationalIntentActivity {
 		edu = edu + " Activity"
 	}
 	mes.CreateExtensionInstance.Metadata.EducationalIntent = edu
@@ -441,49 +441,49 @@ func (p *SoapRequest) UpdateLink(link Link) (err error, r *SoapRequest) {
 	mes.UpdateExtensionInstance.Title = link.Title
 	mes.UpdateExtensionInstance.Metadata.Description = link.Description
 	mes.UpdateExtensionInstance.Metadata.Language = link.Language
-	if link.Format.Video {
+	if link.FormatVideo {
 		mes.UpdateExtensionInstance.Metadata.Format = "Video"
-	} else if link.Format.Interactive {
+	} else if link.FormatInteractive {
 		mes.UpdateExtensionInstance.Metadata.Format = "Interactive"
-	} else if link.Format.Image {
+	} else if link.FormatImage {
 		mes.UpdateExtensionInstance.Metadata.Format = "Image"
-	} else if link.Format.Audio {
+	} else if link.FormatAudio {
 		mes.UpdateExtensionInstance.Metadata.Format = "Audio"
-	} else if link.Format.Any {
+	} else if link.FormatAny {
 		mes.UpdateExtensionInstance.Metadata.Format = "Any"
-	} else if link.Format.Text {
+	} else if link.FormatText {
 		mes.UpdateExtensionInstance.Metadata.Format = "Text"
 	} else {
 		mes.UpdateExtensionInstance.Metadata.Format = "Any"
 	}
-	mes.UpdateExtensionInstance.Metadata.Keywords.Keyword = link.Keywords
+	mes.UpdateExtensionInstance.Metadata.Keywords.Keyword = strings.Split(link.Keywords, ",")
 	role := ""
-	if link.IntendedEndUserRole.Mentor {
+	if link.IntendedEndUserRoleMentor {
 		role = role + " Mentor"
 	}
-	if link.IntendedEndUserRole.Learner {
+	if link.IntendedEndUserRoleLearner {
 		role = role + " Learner"
 	}
-	if link.IntendedEndUserRole.Instructor {
+	if link.IntendedEndUserRoleInstructor {
 		role = role + " Instructor"
 	}
 	mes.UpdateExtensionInstance.Metadata.IntendedEndUserRole = role
 	mes.UpdateExtensionInstance.Metadata.Grade = link.Grade
 	mes.UpdateExtensionInstance.Metadata.ThumbnailUrl = link.ThumbnailUrl
 	edu := ""
-	if link.EducationalIntent.ProfessionalDevelopment {
+	if link.EducationalIntentProfessionalDevelopment {
 		edu = edu + " ProfessionalDevelopment"
 	}
-	if link.EducationalIntent.Practice {
+	if link.EducationalIntentPractice {
 		edu = edu + " Practice"
 	}
-	if link.EducationalIntent.Instructional {
+	if link.EducationalIntentInstructional {
 		edu = edu + " Instructional"
 	}
-	if link.EducationalIntent.Assessment {
+	if link.EducationalIntentAssessment {
 		edu = edu + " Assessment"
 	}
-	if link.EducationalIntent.Activity {
+	if link.EducationalIntentActivity {
 		edu = edu + " Activity"
 	}
 	mes.UpdateExtensionInstance.Metadata.EducationalIntent = edu
