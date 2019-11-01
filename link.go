@@ -9,34 +9,29 @@ type Link struct {
 	Id          string
 	Description string
 	Language    string
-	Format      struct {
-		Any         bool
-		Audio       bool
-		Image       bool
-		Interactive bool
-		Text        bool
-		Video       bool
-	}
-	Keywords            []string
-	IntendedEndUserRole struct {
-		Learner    bool
-		Instructor bool
-		Mentor     bool
-	}
+	FormatAny         bool
+	FormatAudio       bool
+	FormatImage       bool
+	FormatInteractive bool
+	FormatText        bool
+	FormatVideo       bool
+	Keywords            string // List with commas
+	IntendedEndUserRoleLearner    bool
+	IntendedEndUserRoleInstructor bool
+	IntendedEndUserRoleMentor     bool
 	Grade             string
 	ThumbnailUrl      string
-	EducationalIntent struct {
-		Instructional           bool
-		Practice                bool
-		ProfessionalDevelopment bool
-		Assessment              bool
-		Activity                bool
-	}
+	EducationalIntentInstructional           bool
+	EducationalIntentPractice                bool
+	EducationalIntentProfessionalDevelopment bool
+	EducationalIntentAssessment              bool
+	EducationalIntentActivity                bool
 	Publisher string
 	Title     string
 	Url       string
 	basicData ItslearningBasicData
 }
+
 type ItslearningBasicData struct {
 	userSyncKey string
 	vendorID    string
@@ -123,24 +118,31 @@ func (p *Link) SetLinkData(title, description, language, format, intendedEndUser
 	if count > 1 {
 		err = errors.New("Only one Format is allowed!")
 	}
-	p.Format.Text = FormatText
-	p.Format.Any = FormatAny
-	p.Format.Audio = FormatAudio
-	p.Format.Image = FortmatImage
-	p.Format.Interactive = FormatInteractive
-	p.Format.Video = FormatVideo
-
-	p.Keywords = keywords
-	p.IntendedEndUserRole.Instructor = IntendedEndUserRoleInstructor
-	p.IntendedEndUserRole.Learner = IntendedEndUserRoleLearner
-	p.IntendedEndUserRole.Mentor = IntendedEndUserRoleMentor
+	p.FormatText = FormatText
+	p.FormatAny = FormatAny
+	p.FormatAudio = FormatAudio
+	p.FormatImage = FortmatImage
+	p.FormatInteractive = FormatInteractive
+	p.FormatVideo = FormatVideo
+	tmp := ""
+	for i := 0; i < len (keywords); i++ {
+		if i == 0 {
+			tmp = keywords[i]
+		}else {
+			tmp = tmp + "," + keywords[i]
+		}
+	}
+	p.Keywords = tmp
+	p.IntendedEndUserRoleInstructor = IntendedEndUserRoleInstructor
+	p.IntendedEndUserRoleLearner = IntendedEndUserRoleLearner
+	p.IntendedEndUserRoleMentor = IntendedEndUserRoleMentor
 	p.Grade = grade
 	p.ThumbnailUrl = thumbnailUrl
-	p.EducationalIntent.Activity = EducationalIntentActivity
-	p.EducationalIntent.Assessment = EducationalIntentAssessment
-	p.EducationalIntent.Instructional = EducationalIntentInstructional
-	p.EducationalIntent.Practice = EducationalIntentPractice
-	p.EducationalIntent.ProfessionalDevelopment = EducationalIntentProfessionalDevelopment
+	p.EducationalIntentActivity = EducationalIntentActivity
+	p.EducationalIntentAssessment = EducationalIntentAssessment
+	p.EducationalIntentInstructional = EducationalIntentInstructional
+	p.EducationalIntentPractice = EducationalIntentPractice
+	p.EducationalIntentProfessionalDevelopment = EducationalIntentProfessionalDevelopment
 	p.Publisher = publisher
 	p.Url = url
 	r = p
